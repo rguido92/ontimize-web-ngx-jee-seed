@@ -1,0 +1,6 @@
+<o-form-layout-manager attr="branchesHome" title="{{'BRANCHES' | oTranslate }}" separator=" " mode="dialog" label-columns="NAME">
+    <o-table attr="branchesTable" service="branches" entity="branch" keys="OFFICEID"
+        columns="NAME;ADDRESS;STARTDATE;PHONE;OFFICEID" visible-columns="NAME;ADDRESS;STARTDATE;PHONE" query-rows="15">
+        <o-table-column attr="STARTDATE" title="STARTDATE" type="date" format="LL"></o-table-column>
+    </o-table>
+</o-form-layout-manager>

@@ -1,0 +1,42 @@
+<o-form show-header="no" class="fill-form">
+    <o-column-collapsible attr="filterContainer" title="FILTERS_ACCOUNTS" icon="filter_alt" appearance="none"
+        layout-gap="8px">
+        <div fxLayout="row" fxLayoutGap="8px">
+            <o-column fxFlex="50" title="STARTDATE">
+                <o-date-input attr="startInit" label="INIT" read-only="no" required="no"></o-date-input>
+                <o-date-input attr="endInit" label="END" read-only="no" required="no"></o-date-input>
+            </o-column>
+            <o-column fxFlex="50" title="ENDDATE">
+                <o-date-input attr="startEnd" label="INIT" read-only="no" required="no"></o-date-input>
+                <o-date-input attr="endEnd" label="END" read-only="no" required="no"></o-date-input>
+            </o-column>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="8px">
+            <o-button attr="filter" [oFilterBuilderQuery]="filterBuilder" type="flat" color="primary" label="FILTER">
+            </o-button>
+            <o-button attr="clear" [oFilterBuilderClear]="filterBuilder" type="flat" color="primary" label="CLEAR">
+            </o-button>
+        </div>
+    </o-column-collapsible>
+    <o-filter-builder #filterBuilder attr="thefilter"
+        filters="STARTDATE_I:startInit;STARTDATE_E:endInit;ENDDATE_I:startEnd;ENDDATE_E:endEnd" [target]="accountTable"
+        query-on-change="no" [expression-builder]="createFilter"></o-filter-builder>
+    <div fxFlex>
+        <o-table fxFlex #accountTable attr="accountsTable" service="branches" entity="account" keys="ACCOUNTID"
+            columns="ACCOUNTID;ENTITYID;OFFICEID;CDID;ANID;STARTDATE;ENDDATE;INTERESRATE;ACCOUNTTYP"
+            visible-columns="ACCOUNTNUMBER;STARTDATE;ENDDATE;INTERESRATE;INTERESRATE_MONTHLY;ACCOUNTTYP"
+            query-rows="13">
+            <o-table-column attr="STARTDATE" title="STARTDATE" type="date" format="LL"></o-table-column>
+            <o-table-column attr="ENDDATE" title="ENDDATE" type="date" format="LL"></o-table-column>
+            <o-table-column attr="INTERESRATE" title="INTERESRATE" type="percentage" width="150px"
+                decimal-separator=",">
+            </o-table-column>
+            <o-table-column attr="ACCOUNTNUMBER" title="ACCOUNTNUMBER" content-align="center">
+                <app-account-number-render></app-account-number-render>
+            </o-table-column>
+            <o-table-column-calculated attr="INTERESRATE_MONTHLY" title="INTERESRATE_MONTHLY"
+                [operation-function]="intRateMonthly" type="percentage" decimal-separator="," content-align="center">
+            </o-table-column-calculated>
+        </o-table>
+    </div>
+</o-form>

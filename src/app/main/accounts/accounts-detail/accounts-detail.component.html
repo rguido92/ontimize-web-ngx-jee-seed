@@ -1,0 +1,50 @@
+<o-form attr="accountsTable" editable-detail=" false" service="branches" entity="accountBalance" keys="ACCOUNTID"
+    columns="ACCOUNTID;ACCOUNTNUMBER" show-header="yes" header-actions="R;D" show-header-navigation="yes"
+    keys-sql-types="INTEGER" class="fill-form">
+    <div fxLayout="column" fxLayoutGap="8px">
+        <div fxLayout="row" fxLayoutGap="8px">
+            <o-text-input fxFlex="40" attr="ACCOUNTNUMBER" sql-type="STRING"></o-text-input>
+            <o-combo fxFlex="50" attr="OFFICEID" service="branches" entity="branch" keys="OFFICEID"
+                columns="OFFICEID;NAME" visible-columns="NAME" value-column="OFFICEID"></o-combo>
+            <o-currency-input fxFlex="20" attr="BALANCE" currency-symbol="EUR"
+                max-decimal-digits="2"></o-currency-input>
+        </div>
+        <div fxLayout="row" fxLayoutGap="8px">
+            <o-date-input fxFlex="20" attr="ENDDATE"></o-date-input>
+            <o-percent-input fxFlex="20" attr="INTERESRATE"></o-percent-input>
+            <o-text-input fxFlex="60" attr="ACCOUNTTYP" sql-type="STRING"></o-text-input>
+        </div>
+        <div fxFlex fxLayout="row" fxLayoutGap="8px">
+            <o-table fxFlex="50" attr="customersTable" service="customers" entity="vCustomerAccount"
+                parent-keys="ACCOUNTID" keys="CUSTOMERACCOUNTID"
+                columns="ID;NAME;SURNAME;CUSTOMERID;CUSTOMERACCOUNTID;CUSTOMERTYPEID"
+                visible-columns="ID;NAME;SURNAME;CUSTOMERTYPEID" query-rows="15" insert-button="yes"
+                insert-form-route="addcustomer/new" detail-mode="none">
+                <o-table-column attr="ID" title="ID" content-align="center"></o-table-column>
+                <o-table-column attr="NAME" title="NAME" content-align="center"></o-table-column>
+                <o-table-column attr="SURNAME" title="SURNAME"></o-table-column>
+                <o-table-column attr="CUSTOMERTYPEID" title="CUSTOMERTYPEID" content-align="center">
+                    <app-customertype-column-renderer></app-customertype-column-renderer>
+                </o-table-column>
+            </o-table>
+            <o-table fxFlex="50" attr="movementsTable" service="movements" entity="movement" parent-keys="ACCOUNTID"
+                keys="MOVEMENTID" columns="DATE_;CONCEPT;MOVEMENT;MOVEMENTTYPEID"
+                visible-columns="DATE_;CONCEPT;MOVEMENT;MOVEMENTTYPEID" query-rows="15"
+                insert-form-route="addMovement/new" detail-mode="none" insert-button="yes">
+                <o-table-column attr="DATE_" title="DATE_" type="date" format="LL"></o-table-column>
+                <o-table-column attr="MOVEMENT" title="MOVEMENT" content-align="center">
+                    <app-movement-column-renderer></app-movement-column-renderer>
+                </o-table-column>
+                <o-table-column attr="MOVEMENTTYPEID" title="MOVEMENTTYPEID">
+                    <o-table-cell-renderer-service service="movements" entity="movementType"
+                        columns="DESCRIPTION;MOVEMENTTYPEID" value-column="DESCRIPTION">
+                    </o-table-cell-renderer-service>
+                </o-table-column>
+            </o-table>
+        </div>
+        <div fxFlex fxLayout="row" class="bg-level-1" fxLayoutAlign="center center">
+            <o-chart type="pie" service="movements" entity="movement" x-axis="CONCEPT" parent-keys="ACCOUNTID"
+                query-on-init="no" y-axis="MOVEMENT" [chart-parameters]="movementTypesChartParams"></o-chart>
+        </div>
+    </div>
+</o-form>

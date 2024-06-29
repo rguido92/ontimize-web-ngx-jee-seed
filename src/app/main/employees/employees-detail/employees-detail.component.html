@@ -1,0 +1,29 @@
+<div fxFill fxLayout="column" fxLayoutAlign="space-evenly center">
+    <div fxLayout="row" fxLayoutAlign="center center" fxLayoutGap="8px">
+        <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="4px" class="employeeFirst">
+            <img [src]="getImageSrc(data.EMPLOYEEPHOTO)" width="144px" height="200px">
+            <span><strong>{{ data.EMPLOYEENAME }} {{ data.EMPLOYEESURNAME }}</strong></span>
+            <mat-divider></mat-divider>
+            <span><em>{{ data.EMPLOYEETYPENAME }}</em></span>
+            <mat-divider></mat-divider>
+        </div>
+        <div fxLayout="column" class="employeeSecond">
+            <span *ngIf="data.EMPLOYEEEMAIL;else no_mail">
+                <mat-icon>email</mat-icon><span>{{ data.EMPLOYEEEMAIL }}</span>
+            </span>
+            <ng-template #no_mail><span><mat-icon>email</mat-icon><span>{{ "NO_DATA_AVAILABLE" |
+                        oTranslate}}</span></span></ng-template>
+            <span *ngIf="data.EMPLOYEEPHONE;else no_phone">
+                <mat-icon>smartphone</mat-icon><span>{{ data.EMPLOYEEPHONE }}</span>
+            </span>
+            <ng-template #no_phone><span><mat-icon>smartphone</mat-icon><span>{{ "NO_DATA_AVAILABLE" |
+                        oTranslate}}</span></span></ng-template>
+            <span *ngIf="data.EMPLOYEEADDRESS;else no_address">
+                <mat-icon>home</mat-icon><span>{{ data.EMPLOYEEADDRESS }}</span>
+            </span>
+            <ng-template #no_address><span><mat-icon>home</mat-icon><span>{{ "NO_DATA_AVAILABLE" |
+                        oTranslate}}</span></span></ng-template>
+        </div>
+    </div>
+    <span layout-margin-right fxFlexAlign="end"><mat-icon>domain</mat-icon>{{ data.NAME }}</span>
+</div>

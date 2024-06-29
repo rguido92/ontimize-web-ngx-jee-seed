@@ -1,0 +1,9 @@
+<div mat-dialog-content>
+    <o-form #form (onFormModeChange)="forceInsertMode($event)" (onInsert)="closeDialog($event)" service="branches"
+        entity="account" show-header="yes" after-insert-mode="new" undo-button="no" ignore-default-navigation="yes">
+        <o-combo attr="OFFICEID" label="OFFICEID" service="branches" entity="branch" value-column="OFFICEID"
+            columns="OFFICEID;NAME" visible-columns="NAME" read-only="no" required="yes"></o-combo>
+        <o-integer-input oHidden attr="CUSTOMERID"></o-integer-input>
+        <o-date-input attr="STARTDATE"></o-date-input>
+    </o-form>
+</div>

@@ -1,0 +1,12 @@
+<o-form service-type="starWars" entity="films" keys="uuid" show-header="no" editable-detail="no">
+    <div fxLayout="row" fxLayoutGap="8px">
+        <div fxFlex="70" fxLayout="column" fxLayoutGap="8px">
+            <o-text-input attr="title"></o-text-input>
+            <o-text-input attr="episode_id" sql-type="INTEGER"></o-text-input>
+            <o-text-input attr="director"></o-text-input>
+            <o-text-input attr="producer"></o-text-input>
+            <o-text-input attr="release_date"></o-text-input>
+        </div>
+        <o-textarea-input fxFlex="30" attr="opening_crawl" rows="25"></o-textarea-input>
+    </div>
+</o-form>

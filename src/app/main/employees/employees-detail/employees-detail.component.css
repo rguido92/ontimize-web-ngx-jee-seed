@@ -1,0 +1,22 @@
+.mat-divider {
+    border-top-width: 2px;
+    width: 100px;
+  }
+  
+  .employeeFirst {
+    min-width: 200px;
+    max-width: 200px;
+  }
+  
+  .employeeFirst span {
+    text-align: center;
+  }
+  
+  span {
+    display: flex;
+    align-items: center;
+  }
+  
+  span mat-icon {
+    padding-right: 8px;
+  }

@@ -1,0 +1,12 @@
+.employeeCard {
+    width: 300px;
+    background-color: white;
+  }
+  
+  .employeeCard img {
+    margin-top: 8px;
+  }
+  
+  .employeeCard .office {
+    font-size: 0.8em;
+  }
