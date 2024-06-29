@@ -1,0 +1,10 @@
+.account-card {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .account-card .donutChart {
+    margin-top: -140px;
+    margin-bottom: -140px;
+  }
